@@ -32,7 +32,7 @@ Pliki naglowkowe dla PVFSa.
 %setup -q
 
 %build
-autoconf
+%{__autoconf}
 %configure --enable-lftp
 
 %{__make}
