@@ -56,5 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %{_mandir}/man*/*
 
 %files devel
+%defattr(644,root,root,755)
 %attr(644,root,root) %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/*
