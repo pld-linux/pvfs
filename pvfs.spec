@@ -132,8 +132,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n kernel-%{name}
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver_str}/fs/pvfs.o
+%attr(600,root,root) /lib/modules/%{_kernel_ver_str}/fs/pvfs.o*
 
 %files -n kernel-smp-%{name}
 %defattr(644,root,root,755)
-%attr(600,root,root) /lib/modules/%{_kernel_ver_str}smp/fs/pvfs.o
+%attr(600,root,root) /lib/modules/%{_kernel_ver_str}smp/fs/pvfs.o*
