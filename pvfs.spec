@@ -43,14 +43,13 @@ rm -rf $RPM_BUILD_ROOT
 	install_root=$RPM_BUILD_ROOT \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-gzip -9nf BUGS NOTES README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc BUGS NOTES README
 %attr(755,root,root) %{_bindir}/*
 %attr(750,root,root) %{_sbindir}/*
 %attr(644,root,root) %{_mandir}/man*/*
