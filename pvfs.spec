@@ -23,6 +23,16 @@ Parallel Virtual File System.
 %description -l pl
 PVFS - Równoleg³y Wirtualny System Plików.
 
+%package devel
+Summary:	Header files for PVFS.
+Summary(pl):	Pliki naglowkowe dla PVFSa.
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}=%{version}
+
+%description devel 
+%description -l pl devel
+
 %prep
 %setup -q
 
@@ -47,7 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/*
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/*
 %attr(750,root,root) %{_sbindir}/*
-%{_mandir}/man*/*
+%attr(644,root,root) %{_mandir}/man*/*
+
+%files devel
+%attr(644,root,root) %{_includedir}/*.h
