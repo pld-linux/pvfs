@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_dist_kernel	- without kernel from distribution
+%bcond_without	dist_kernel	# without kernel from distribution
 #
 Summary:	Parallel Virtual File System
 Summary(pl):	PVFS - Równoleg³y Wirtualny System Plików
@@ -21,7 +21,7 @@ Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
 Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
-%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
+%{?with_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,7 +50,7 @@ Summary:	Linux kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-%{!?_without_dist_kernel:%requires_releq_kernel_up}
+%{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
@@ -65,7 +65,7 @@ Summary:	Linux SMP kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa SMP dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-%{!?_without_dist_kernel:%requires_releq_kernel_smp}
+%{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
