@@ -1,5 +1,3 @@
-%define		no_install_post_compress_modules	1
-
 Summary:	Parallel Virtual File System
 Summary(pl):	PVFS - Równoleg³y Wirtualny System Plików
 Name:		pvfs
