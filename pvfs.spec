@@ -27,7 +27,7 @@ PVFS - Równoleg³y Wirtualny System Plików.
 
 %package devel
 Summary:	Header files for PVFS
-Summary(pl):	Pliki naglowkowe dla PVFSa
+Summary(pl):	Pliki nag³ówkowe dla PVFS-a
 Group:		Development/Libraries
 Requires:	%{name}=%{version}
 
@@ -35,26 +35,33 @@ Requires:	%{name}=%{version}
 Header files for PVFS.
 
 %description devel -l pl
-Pliki naglowkowe dla PVFSa.
+Pliki nag³ówkowe dla PVFS-a.
 
 %package -n kernel-%{name}
-Summary:	Kernel driver for PVFS
-Summary(pl):	Sterownik kernela dla PVFSa
+Summary:	Linux kernel driver for PVFS
+Summary(pl):	Sterownik j±dra Linuksa dla PVFS-a
 Group:		Development/Libraries
 Release:	%{_rel}@%{_kernel_ver_str}
 #Requires:	%{name}=%{version}
 
 %description -n kernel-%{name}
-%description -l pl -n kernel-%{name} 
+Linux kernel driver for PVFS.
+
+%description -n kernel-%{name} -l pl
+Sterownik j±dra Linuksa dla PVFS-a.
 
 %package -n kernel-smp-%{name}
-Summary:	Kernel SMP driver for PVFS
-Summary(pl):	Sterownik kernela SMP dla PVFSa
+Summary:	Linux SMP kernel driver for PVFS
+Summary(pl):	Sterownik j±dra Linuksa SMP dla PVFS-a
 Group:		Development/Libraries
 Release:	%{_rel}@%{_kernel_ver_str}
 #Requires:	%{name}=%{version}
+
 %description -n kernel-smp-%{name}
-%description -l pl -n kernel-smp-%{name}
+Linux SMP kernel driver for PVFS.
+
+%description -n kernel-smp-%{name} -l pl
+Sterownik j±dra Linuksa SMP dla PVFS-a.
 
 %prep
 %setup -q -a1 
@@ -73,11 +80,11 @@ Release:	%{_rel}@%{_kernel_ver_str}
 %{__make}
 
 echo Installing documentations ...
-install %SOURCE10 .
-install %SOURCE11 .
+install %{SOURCE10} .
+install %{SOURCE11} .
 
 echo Building kernel pvfs.o module...
-cd %name-kernel-%{version}-linux-2.4
+cd %{name}-kernel-%{version}-linux-2.4
 %configure \
 	--with-newstyle \
 	--with-pvfs=".." \
@@ -98,17 +105,15 @@ rm -rf $RPM_BUILD_ROOT
 	install_root=$RPM_BUILD_ROOT \
 	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver_str}{,smp}/fs/
+install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver_str}{,smp}/fs
 install -d $RPM_BUILD_ROOT%{_progdocdir}
 
-cd %name-kernel-%{version}-linux-2.4
+cd %{name}-kernel-%{version}-linux-2.4
 install pvfs.up $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver_str}/fs/pvfs.o
 
 install pvfs.o $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver_str}smp/fs
 
 install mount.pvfs $RPM_BUILD_ROOT%{_bindir}
-install %SOURCE10 $RPM_BUILD_ROOT%{_progdocdir}
-install %SOURCE11 $RPM_BUILD_ROOT%{_progdocdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -126,7 +131,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*
 
 %files -n kernel-%{name}
+%defattr(644,root,root,755)
 %attr(600,root,root) /lib/modules/%{_kernel_ver_str}/fs/pvfs.o
 
 %files -n kernel-smp-%{name}
+%defattr(644,root,root,755)
 %attr(600,root,root) /lib/modules/%{_kernel_ver_str}smp/fs/pvfs.o
