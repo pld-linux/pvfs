@@ -11,9 +11,13 @@ Release:	%{_rel}
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-%{version}.tgz
+# Source0-md5:	18f0d8d3349e8f4e050e2066d9f17525
 Source1:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-kernel-%{version}-linux-2.4.tgz
+# Source1-md5:	78827a20c63783ee7443d29dc89f1b6a
 Source10:	ftp://ftp.parl.clemson.edu/pub/%{name}/user-guide.pdf
+# Source10-md5:	3b21d77e3e04b607ad1d792c20ebdd3e
 Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
+# Source11-md5:	934bcedeb47cb802257925d990281c4d
 Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
