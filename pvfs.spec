@@ -21,7 +21,7 @@ Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
 Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
-%{!?_without_dist_kernel:BuildRequires: kernel-headers}
+%{!?_without_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,7 +76,7 @@ Linux SMP kernel driver for PVFS.
 Sterownik j±dra Linuksa SMP dla PVFS-a.
 
 %prep
-%setup -q -a1 
+%setup -q -a1
 %patch1 -p1
 
 %build
