@@ -24,8 +24,8 @@ Parallel Virtual File System.
 PVFS - RСwnolegЁy Wirtualny System PlikСw.
 
 %package devel
-Summary:	Header files for PVFS.
-Summary(pl):	Pliki naglowkowe dla PVFSa.
+Summary:	Header files for PVFS
+Summary(pl):	Pliki naglowkowe dla PVFSa
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -36,8 +36,11 @@ Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}=%{version}
 
-%description devel 
-%description -l pl devel
+%description devel
+Header files for PVFS.
+
+%description devel -l pl
+Pliki naglowkowe dla PVFSa.
 
 %prep
 %setup -q
