@@ -1,3 +1,7 @@
+#
+# Conditional build:
+# _without_dist_kernel	- without kernel from distribution
+#
 Summary:	Parallel Virtual File System
 Summary(pl):	PVFS - Równoleg³y Wirtualny System Plików
 Name:		pvfs
@@ -13,7 +17,8 @@ Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
 Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+%{!?_without_dist_kernel:BuildRequires: kernel-headers}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_progdocdir	%{_datadir}/doc/%{name}-%{version}
 
@@ -38,8 +43,10 @@ Pliki nag³ówkowe dla PVFS-a.
 %package -n kernel-%{name}
 Summary:	Linux kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa dla PVFS-a
-Group:		Development/Libraries
 Release:	%{_rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
+%{!?_without_dist_kernel:%requires_releq_kernel_up}
+Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
 %description -n kernel-%{name}
@@ -51,8 +58,10 @@ Sterownik j±dra Linuksa dla PVFS-a.
 %package -n kernel-smp-%{name}
 Summary:	Linux SMP kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa SMP dla PVFS-a
-Group:		Development/Libraries
 Release:	%{_rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
+%{!?_without_dist_kernel:%requires_releq_kernel_smp}
+Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
 %description -n kernel-smp-%{name}
@@ -63,7 +72,6 @@ Sterownik j±dra Linuksa SMP dla PVFS-a.
 
 %prep
 %setup -q -a1 
-
 %patch1 -p1
 
 %build
@@ -96,7 +104,6 @@ echo Building SMP kernel pvfs.o module...
 # make SMP
 %{__make} SMPFLAGS="-D__SMP__ -D__KERNEL_SMP=1"
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
@@ -115,6 +122,18 @@ install mount.pvfs $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-n kernel-%{name}
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver} %{_kernel_ver}
+
+%postun -n kernel-%{name}
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver} %{_kernel_ver}
+
+%post	-n kernel-smp-%{name}
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver}smp %{_kernel_ver}smp
+
+%postun -n kernel-smp-%{name}
+/sbin/depmod -a -F /boot/System.map-%{_kernel_ver}smp %{_kernel_ver}smp
 
 %files
 %defattr(644,root,root,755)
