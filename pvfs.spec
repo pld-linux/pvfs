@@ -71,7 +71,12 @@ Release:	%{_rel}@%{_kernel_ver_str}
 	--enable-madvise
 
 %{__make}
-echo Building kernel pvfs.o ...
+
+echo Installing documentations ...
+install %SOURCE10 .
+install %SOURCE11 .
+
+echo Building kernel pvfs.o module...
 cd %name-kernel-%{version}-linux-2.4
 %configure \
 	--with-newstyle \
@@ -82,8 +87,10 @@ cd %name-kernel-%{version}-linux-2.4
 mv pvfs.o pvfs.up
 %{__make} clean
 
+echo Building SMP kernel pvfs.o module...
 # make SMP
 %{__make} SMPFLAGS="-D__SMP__ -D__KERNEL_SMP=1"
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(644,root,root) %{_progdocdir}/*.pdf
+%doc README BUGS NOTES *.pdf
 %attr(755,root,root) %{_bindir}/*
 %attr(750,root,root) %{_sbindir}/*
 %attr(644,root,root) %{_mandir}/man*/*
