@@ -1,48 +1,53 @@
-Summary:	PVFS
-Summary(pl):	PVFS
+Summary:	Parallel Virtual File System
+Summary(pl):	PVFS - RÛwnoleg≥y Wirtualny System PlikÛw
 Name:		pvfs
 Version:	1.5.2
 Release:	1
-Copyright:	GPL
+License:	GPL
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-%{version}.tgz
-#BuildRequires:	
-#Requires:	
+URL:		http://www.parl.clemson.edu/pvfs/
+BuildRequires:	autoconf
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_prefix	/usr
-
 %description
+Parallel Virtual File System.
 
 %description -l pl
+PVFS - RÛwnoleg≥y Wirtualny System PlikÛw.
 
 %prep
 %setup -q
 
-#%patch
-
 %build
-./configure --prefix=%{_prefix} \
-	--enable-lfs
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+autoconf
+%configure --enable-lftp
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} \
-	MANDIR=$RPM_BUILD_ROOT%{_mandir} \
-	install
+%{__make} install \
+	install_root=$RPM_BUILD_ROOT \
+	MANDIR=$RPM_BUILD_ROOT%{_mandir}
 
-%post
-%postun
+gzip -9nf BUGS NOTES README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc
-%attr(755, root, root) %{_bindir}/*
-%attr(644, root, root) %{_libdir}/*
-%attr(644, root, root) %{_includedir}/*.h
-%attr(750, root, root) %{_sbindir}/*
-%attr(644, root, root) %{_mandir}/man*/*
+%doc *.gz
+%attr(755,root,root) %{_bindir}/*
+%{_libdir}/*
+%{_includedir}/*.h
+%attr(750,root,root) %{_sbindir}/*
+%{_mandir}/man*/*
