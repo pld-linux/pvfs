@@ -57,9 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/*
 %attr(750,root,root) %{_sbindir}/*
 %attr(644,root,root) %{_mandir}/man*/*
 
 %files devel
 %attr(644,root,root) %{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/*
