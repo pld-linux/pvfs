@@ -5,20 +5,20 @@
 Summary:	Parallel Virtual File System
 Summary(pl):	PVFS - Równoleg³y Wirtualny System Plików
 Name:		pvfs
-Version:	1.5.6
-%define		_rel 2
+Version:	1.6.3
+%define		_rel 1
 Release:	%{_rel}
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-%{version}.tgz
-# Source0-md5:	18f0d8d3349e8f4e050e2066d9f17525
+# Source0-md5:	06990cd60cc41be113861f54e2ad94ec
 Source1:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-kernel-%{version}-linux-2.4.tgz
-# Source1-md5:	78827a20c63783ee7443d29dc89f1b6a
+# Source1-md5:	4a13ce814e7d17564d399f29d78687da
 Source10:	ftp://ftp.parl.clemson.edu/pub/%{name}/user-guide.pdf
 # Source10-md5:	3b21d77e3e04b607ad1d792c20ebdd3e
 Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
 # Source11-md5:	934bcedeb47cb802257925d990281c4d
-Patch1:		pvfs-kernel-Makefile.in.patch
+#Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
 %{?with_dist_kernel:BuildRequires:	kernel-headers}
@@ -77,11 +77,10 @@ Sterownik j±dra Linuksa SMP dla PVFS-a.
 
 %prep
 %setup -q -a1
-%patch1 -p1
+#%patch1 -p1
 
 %build
-%{__autoconf}
-%configure \
+%configure2_13 \
 	--without-single \
 	--enable-scyld \
 	--enable-nodelay \
@@ -99,6 +98,7 @@ cd %{name}-kernel-%{version}-linux-2.4
 %configure \
 	--with-newstyle \
 	--with-pvfs=".." \
+	--with-kernel-headers="/usr/src/linux-2.4/include" \
 	--with-libpvfs-dir="../lib"
 # make UP
 %{__make} SMPFLAGS=""
