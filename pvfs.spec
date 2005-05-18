@@ -21,11 +21,12 @@ Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
 #Patch1:		pvfs-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
-%{?with_dist_kernel:BuildRequires:	kernel-headers}
+%{?with_dist_kernel:BuildRequires:	kernel24-headers}
 BuildRequires:	rpmbuild(macros) >= 1.118
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_progdocdir	%{_datadir}/doc/%{name}-%{version}
+%define		_kernelsrcdir	/usr/src/linux-2.4
 
 %description
 Parallel Virtual File System.
@@ -45,7 +46,7 @@ Header files for PVFS.
 %description devel -l pl
 Pliki nag³ówkowe dla PVFS-a.
 
-%package -n kernel-%{name}
+%package -n kernel24-%{name}
 Summary:	Linux kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -54,13 +55,13 @@ Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
-%description -n kernel-%{name}
+%description -n kernel24-%{name}
 Linux kernel driver for PVFS.
 
-%description -n kernel-%{name} -l pl
+%description -n kernel24-%{name} -l pl
 Sterownik j±dra Linuksa dla PVFS-a.
 
-%package -n kernel-smp-%{name}
+%package -n kernel24-smp-%{name}
 Summary:	Linux SMP kernel driver for PVFS
 Summary(pl):	Sterownik j±dra Linuksa SMP dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
@@ -69,10 +70,10 @@ Group:		Base/Kernel
 Requires(post,postun):	/sbin/depmod
 #Requires:	%{name}=%{version}
 
-%description -n kernel-smp-%{name}
+%description -n kernel24-smp-%{name}
 Linux SMP kernel driver for PVFS.
 
-%description -n kernel-smp-%{name} -l pl
+%description -n kernel24-smp-%{name} -l pl
 Sterownik j±dra Linuksa SMP dla PVFS-a.
 
 %prep
@@ -98,7 +99,7 @@ cd %{name}-kernel-%{version}-linux-2.4
 %configure \
 	--with-newstyle \
 	--with-pvfs=".." \
-	--with-kernel-headers="/usr/src/linux-2.4/include" \
+	--with-kernel-headers="%{_kernelsrcdir}/include" \
 	--with-libpvfs-dir="../lib"
 # make UP
 %{__make} SMPFLAGS=""
@@ -128,16 +129,16 @@ install mount.pvfs $RPM_BUILD_ROOT%{_bindir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-n kernel-%{name}
+%post	-n kernel24-%{name}
 %depmod %{_kernel_ver}
 
-%postun -n kernel-%{name}
+%postun -n kernel24-%{name}
 %depmod %{_kernel_ver}
 
-%post	-n kernel-smp-%{name}
+%post	-n kernel24-smp-%{name}
 %depmod %{_kernel_ver}smp
 
-%postun -n kernel-smp-%{name}
+%postun -n kernel24-smp-%{name}
 %depmod %{_kernel_ver}smp
 
 %files
@@ -152,10 +153,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/*
 
-%files -n kernel-%{name}
+%files -n kernel24-%{name}
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver_str}/fs/pvfs.o*
 
-%files -n kernel-smp-%{name}
+%files -n kernel24-smp-%{name}
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver_str}smp/fs/pvfs.o*
