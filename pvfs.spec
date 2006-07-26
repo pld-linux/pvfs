@@ -2,23 +2,23 @@
 # Conditional build:
 %bcond_without	dist_kernel	# without kernel from distribution
 #
+%define		_rel 1
 Summary:	Parallel Virtual File System
 Summary(pl):	PVFS - Równoleg³y Wirtualny System Plików
 Name:		pvfs
 Version:	1.6.3
-%define		_rel 1
 Release:	%{_rel}
 License:	GPL
 Group:		Libraries
-Source0:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-%{version}.tgz
+Source0:	ftp://ftp.parl.clemson.edu/pub/pvfs/%{name}-%{version}.tgz
 # Source0-md5:	06990cd60cc41be113861f54e2ad94ec
-Source1:	ftp://ftp.parl.clemson.edu/pub/%{name}/%{name}-kernel-%{version}-linux-2.4.tgz
+Source1:	ftp://ftp.parl.clemson.edu/pub/pvfs/%{name}-kernel-%{version}-linux-2.4.tgz
 # Source1-md5:	4a13ce814e7d17564d399f29d78687da
-Source10:	ftp://ftp.parl.clemson.edu/pub/%{name}/user-guide.pdf
+Source10:	ftp://ftp.parl.clemson.edu/pub/pvfs/user-guide.pdf
 # Source10-md5:	3b21d77e3e04b607ad1d792c20ebdd3e
-Source11:	ftp://ftp.parl.clemson.edu/pub/%{name}/quickstart.pdf
+Source11:	ftp://ftp.parl.clemson.edu/pub/pvfs/quickstart.pdf
 # Source11-md5:	934bcedeb47cb802257925d990281c4d
-#Patch1:		pvfs-kernel-Makefile.in.patch
+#Patch1:	%{name}-kernel-Makefile.in.patch
 URL:		http://www.parl.clemson.edu/pvfs/
 BuildRequires:	autoconf
 %{?with_dist_kernel:BuildRequires:	kernel24-headers}
@@ -146,11 +146,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc README BUGS NOTES *.pdf
 %attr(755,root,root) %{_bindir}/*
 %attr(750,root,root) %{_sbindir}/*
-%attr(644,root,root) %{_mandir}/man*/*
+%{_mandir}/man*/*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(644,root,root) %{_includedir}/*.h
+%{_includedir}/*.h
 %attr(755,root,root) %{_libdir}/*
 
 %files -n kernel24-%{name}
