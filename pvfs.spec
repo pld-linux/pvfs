@@ -4,7 +4,7 @@
 #
 %define		_rel 1
 Summary:	Parallel Virtual File System
-Summary(pl):	PVFS - R體noleg硑 Wirtualny System Plik體
+Summary(pl.UTF-8):   PVFS - R贸wnoleg艂y Wirtualny System Plik贸w
 Name:		pvfs
 Version:	1.6.3
 Release:	%{_rel}
@@ -31,24 +31,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Parallel Virtual File System.
 
-%description -l pl
-PVFS - R體noleg硑 Wirtualny System Plik體.
+%description -l pl.UTF-8
+PVFS - R贸wnoleg艂y Wirtualny System Plik贸w.
 
 %package devel
 Summary:	Header files for PVFS
-Summary(pl):	Pliki nag丑wkowe dla PVFS-a
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe dla PVFS-a
 Group:		Development/Libraries
 Requires:	%{name}=%{version}
 
 %description devel
 Header files for PVFS.
 
-%description devel -l pl
-Pliki nag丑wkowe dla PVFS-a.
+%description devel -l pl.UTF-8
+Pliki nag艂贸wkowe dla PVFS-a.
 
 %package -n kernel24-%{name}
 Summary:	Linux kernel driver for PVFS
-Summary(pl):	Sterownik j眃ra Linuksa dla PVFS-a
+Summary(pl.UTF-8):   Sterownik j膮dra Linuksa dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
@@ -58,12 +58,12 @@ Requires(post,postun):	/sbin/depmod
 %description -n kernel24-%{name}
 Linux kernel driver for PVFS.
 
-%description -n kernel24-%{name} -l pl
-Sterownik j眃ra Linuksa dla PVFS-a.
+%description -n kernel24-%{name} -l pl.UTF-8
+Sterownik j膮dra Linuksa dla PVFS-a.
 
 %package -n kernel24-smp-%{name}
 Summary:	Linux SMP kernel driver for PVFS
-Summary(pl):	Sterownik j眃ra Linuksa SMP dla PVFS-a
+Summary(pl.UTF-8):   Sterownik j膮dra Linuksa SMP dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
@@ -73,8 +73,8 @@ Requires(post,postun):	/sbin/depmod
 %description -n kernel24-smp-%{name}
 Linux SMP kernel driver for PVFS.
 
-%description -n kernel24-smp-%{name} -l pl
-Sterownik j眃ra Linuksa SMP dla PVFS-a.
+%description -n kernel24-smp-%{name} -l pl.UTF-8
+Sterownik j膮dra Linuksa SMP dla PVFS-a.
 
 %prep
 %setup -q -a1
