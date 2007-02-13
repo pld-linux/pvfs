@@ -4,7 +4,7 @@
 #
 %define		_rel 1
 Summary:	Parallel Virtual File System
-Summary(pl.UTF-8):   PVFS - Równoległy Wirtualny System Plików
+Summary(pl.UTF-8):	PVFS - Równoległy Wirtualny System Plików
 Name:		pvfs
 Version:	1.6.3
 Release:	%{_rel}
@@ -36,7 +36,7 @@ PVFS - Równoległy Wirtualny System Plików.
 
 %package devel
 Summary:	Header files for PVFS
-Summary(pl.UTF-8):   Pliki nagłówkowe dla PVFS-a
+Summary(pl.UTF-8):	Pliki nagłówkowe dla PVFS-a
 Group:		Development/Libraries
 Requires:	%{name}=%{version}
 
@@ -48,7 +48,7 @@ Pliki nagłówkowe dla PVFS-a.
 
 %package -n kernel24-%{name}
 Summary:	Linux kernel driver for PVFS
-Summary(pl.UTF-8):   Sterownik jądra Linuksa dla PVFS-a
+Summary(pl.UTF-8):	Sterownik jądra Linuksa dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_up}
@@ -63,7 +63,7 @@ Sterownik jądra Linuksa dla PVFS-a.
 
 %package -n kernel24-smp-%{name}
 Summary:	Linux SMP kernel driver for PVFS
-Summary(pl.UTF-8):   Sterownik jądra Linuksa SMP dla PVFS-a
+Summary(pl.UTF-8):	Sterownik jądra Linuksa SMP dla PVFS-a
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
