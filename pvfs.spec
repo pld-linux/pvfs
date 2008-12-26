@@ -6,7 +6,7 @@
 Summary:	Parallel Virtual File System
 Summary(pl.UTF-8):	PVFS - Równoległy Wirtualny System Plików
 Name:		pvfs
-Version:	1.6.3
+Version:	2.7.1
 Release:	%{_rel}
 License:	GPL
 Group:		Libraries
