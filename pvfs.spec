@@ -78,7 +78,7 @@ Sterownik jądra Linuksa SMP dla PVFS-a.
 
 %prep
 %setup -q -a1
-#%patch1 -p1
+#%%patch1 -p1
 
 %build
 %configure2_13 \
